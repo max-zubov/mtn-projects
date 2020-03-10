@@ -7,15 +7,26 @@
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
+  <property name="test"  location="test"/>
+  <property name="buildtest"  location="buildtest"/>
 
   <target name="init">
     <mkdir dir="${build}"/>
+    <mkdir dir="${buildtest}"/>
   </target>
 
   <target name="compile" depends="init" >
     <javac srcdir="${src}" destdir="${build}">
       <classpath>
         <pathelement path="lib/commons-collections-3.2.1.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="ctest" depends="init" >
+    <javac srcdir="${test}" destdir="${buildtest}">
+      <classpath>
+        <pathelement path="lib/junit-4.11.jar"/>
       </classpath>
     </javac>
   </target>
@@ -33,9 +44,10 @@
     <java jar="${dist}/lib/testProject.jar" fork="true"/>
   </target>
 
-
   <target name="clean">
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
+    <delete dir="${buildtest}"/>
   </target>
+
 </project>
