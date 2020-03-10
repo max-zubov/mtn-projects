@@ -22,8 +22,17 @@
 
   <target name="dist" depends="compile" >
     <mkdir dir="${dist}/lib"/>
-    <jar jarfile="${dist}/lib/testProject.jar" basedir="${build}"/>
+    <jar jarfile="${dist}/lib/testProject.jar" basedir="${build}">
+      <manifest>
+        <attribute name="Main-Class" value="com.test.Project"/>
+      </manifest>
+    </jar>
   </target>
+
+  <target name="run" depends="dist" >
+    <java jar="${dist}/lib/testProject.jar" fork="true"/>
+  </target>
+
 
   <target name="clean">
     <delete dir="${build}"/>
